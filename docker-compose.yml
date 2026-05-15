@@ -1,0 +1,9 @@
+services:
+  cloud-homelab-api:
+    build: .
+    container_name: cloud-homelab-v2-api
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    restart: unless-stopped
