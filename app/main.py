@@ -1,5 +1,6 @@
-from fastapi import FastAPI
+from fastapi import Depends, FastAPI
 from app.config import settings
+from app.security import verify_api_key
 
 app = FastAPI(
     title=settings.APP_NAME,
@@ -30,4 +31,13 @@ def version():
         "service": "cloud-homelab-v2-api",
         "version": settings.APP_VERSION,
         "environment": settings.APP_ENV
+    }
+
+
+@app.get("/secure-info")
+def secure_info(api_key_valid: bool = Depends(verify_api_key)):
+    return {
+        "message": "This endpoint is protected with an API key.",
+        "environment": settings.APP_ENV,
+        "security": "API key authentication enabled"
     }
