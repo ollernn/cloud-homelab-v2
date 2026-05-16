@@ -352,6 +352,7 @@ Detailed documentation is available in the `docs/` folder.
 | `docs/05-azure-deployment.md` | Azure deployment process |
 | `docs/06-monitoring.md` | Uptime Kuma monitoring setup |
 | `docs/07-azure-logs.md` | Azure log stream verification |
+| `docs/08-version-2-summary.md` | Final version 2 project summary |
 
 ## Screenshots
 

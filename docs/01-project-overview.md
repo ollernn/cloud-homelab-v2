@@ -187,6 +187,7 @@ The project documentation is divided into separate files:
 | `docs/05-azure-deployment.md` | Azure deployment process |
 | `docs/06-monitoring.md` | Uptime Kuma monitoring setup |
 | `docs/07-azure-logs.md` | Azure log stream verification |
+| `docs/08-version-2-summary.md` | Final version 2 project summary |
 
 ## Result
 
@@ -211,6 +212,6 @@ The next planned steps are:
 - Improve deployment automation
 - Add GitHub Actions CD
 - Improve secrets handling
-- Add a final project summary
+- Add stronger production-style security
 - Continue updating the portfolio and learning log
 
