@@ -406,15 +406,28 @@ Uptime Kuma monitoring
 
 ## Next Steps
 
-Planned next steps:
+Planned future improvements:
 
-- Review Azure logs
-- Document Azure log usage
-- Improve deployment automation
-- Add GitHub Actions CD
-- Replace development API key with a more secure secret handling approach
-- Add final project summary
-- Continue improving the portfolio project page
+- Add GitHub Actions CD for automatic Azure deployment
+- Use Azure OIDC authentication for secure GitHub Actions deployment
+- Use a private Azure subscription or tenant where app registration permissions are available
+- Store production secrets using Azure Key Vault
+- Use GitHub Actions secrets for deployment-related values
+- Add a custom domain
+- Add alerts for downtime
+- Add Infrastructure as Code with Terraform or Bicep
+- Add a small database-backed feature
+- Add stronger authentication such as OAuth or JWT
+
+## CI/CD Note
+
+GitHub Actions CI is implemented and successfully runs automated tests on push and pull requests.
+
+A future v2.1 improvement was planned to add GitHub Actions CD for automatic Azure deployment. The preferred secure approach is to use Azure OIDC authentication instead of storing long-lived Azure credentials.
+
+However, the current Azure for Students tenant does not allow this user to create the required App Registration / Service Principal. Because of this, automatic Azure deployment has been paused instead of using a less secure workaround.
+
+This will be revisited later using a private Azure subscription or tenant where the required permissions are available.
 
 ## Repository
 

@@ -342,6 +342,8 @@ Current limitations:
 
 - API key handling is basic
 - deployment is not fully automated yet
+- GitHub Actions CD is not implemented yet
+- Secure Azure OIDC deployment could not be configured in the current student tenant because app registration permissions were not available
 - no database is connected
 - no custom domain is configured
 - no HTTPS certificate management beyond Azure’s default endpoint
@@ -353,8 +355,10 @@ Current limitations:
 Possible next improvements:
 
 - Add GitHub Actions CD for automatic Azure deployment
+- Use Azure OIDC authentication for secure GitHub Actions deployment
+- Revisit CD setup using a private Azure subscription or tenant with app registration permissions
 - Store production secrets using Azure Key Vault
-- Use GitHub Actions secrets for deployment credentials
+- Use GitHub Actions secrets for deployment-related values
 - Add a custom domain
 - Add a more advanced monitoring dashboard
 - Add alerts for downtime
@@ -362,6 +366,18 @@ Possible next improvements:
 - Add a small database-backed feature
 - Add authentication with OAuth or JWT
 - Add a final portfolio-focused architecture diagram
+
+## CI/CD Deployment Note
+
+GitHub Actions CI is implemented and working.
+
+A v2.1 improvement was planned to add GitHub Actions CD for automatic deployment to Azure Container Apps.
+
+The preferred secure approach is to use GitHub Actions with Azure OIDC authentication. This avoids storing long-lived Azure credentials as GitHub secrets.
+
+During setup, the current Azure for Students tenant did not allow the creation of the required App Registration / Service Principal. Because of this permission limitation, the CD part was paused instead of using a less secure workaround.
+
+This improvement can be revisited later using a private Azure subscription or tenant where the required Azure permissions are available.
 
 ## Portfolio Summary
 
