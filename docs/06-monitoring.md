@@ -181,8 +181,7 @@ The project now includes:
 
 The next steps are:
 
-- review Azure logs
 - update the main `README.md`
 - create a final project summary
-- update the portfolio project page if needed
-- add a learning log entry
+- optionally add GitHub Actions CD
+- improve secrets handling

@@ -118,6 +118,7 @@ The project currently includes:
 - Successful Azure endpoint testing
 - Uptime Kuma monitoring from the local homelab
 - Screenshots for documentation and portfolio use
+- Azure log stream verification
 
 ## Azure Deployment
 
@@ -185,6 +186,7 @@ The project documentation is divided into separate files:
 | `docs/04-testing-and-ci.md` | pytest and GitHub Actions CI |
 | `docs/05-azure-deployment.md` | Azure deployment process |
 | `docs/06-monitoring.md` | Uptime Kuma monitoring setup |
+| `docs/07-azure-logs.md` | Azure log stream verification |
 
 ## Result
 
@@ -206,10 +208,9 @@ This makes the project relevant for learning and demonstrating skills in cloud s
 
 The next planned steps are:
 
-- Review Azure logs
-- Document Azure log usage
 - Improve deployment automation
 - Add GitHub Actions CD
 - Improve secrets handling
 - Add a final project summary
 - Continue updating the portfolio and learning log
+

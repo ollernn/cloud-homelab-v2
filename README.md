@@ -351,6 +351,7 @@ Detailed documentation is available in the `docs/` folder.
 | `docs/04-testing-and-ci.md` | pytest and GitHub Actions CI |
 | `docs/05-azure-deployment.md` | Azure deployment process |
 | `docs/06-monitoring.md` | Uptime Kuma monitoring setup |
+| `docs/07-azure-logs.md` | Azure log stream verification |
 
 ## Screenshots
 
@@ -366,6 +367,7 @@ azure-version-endpoint.png
 azure-swagger-docs.png
 azure-secure-info-endpoint.png
 monitoring-uptime-kuma-overview.png
+azure-log-stream.png
 ```
 
 ## Troubleshooting Notes
