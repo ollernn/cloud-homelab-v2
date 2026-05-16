@@ -15,11 +15,12 @@ This deployment shows practical skills in:
 - Azure resource management
 - Azure Container Registry
 - Azure Container Apps
-- Container-based cloud deployment
-- Public HTTP ingress
-- Environment variables in cloud environments
-- Basic cloud security considerations
-- Technical troubleshooting and documentation
+- container-based cloud deployment
+- public HTTP ingress
+- environment variables in cloud environments
+- basic cloud security considerations
+- troubleshooting Azure deployment issues
+- technical documentation
 
 ## Azure Resources
 
@@ -102,16 +103,25 @@ The Container App was configured with:
 
 The Azure Container App uses environment variables to configure the application.
 
-| Variable | Value |
+| Variable | Purpose |
 |---|---|
-| `APP_NAME` | `Cloud Homelab v2 API` |
-| `APP_VERSION` | `1.0.0` |
-| `APP_ENV` | `azure` |
-| `API_KEY` | Stored as a development test value during deployment |
+| `APP_NAME` | Sets the application name |
+| `APP_VERSION` | Sets the application version |
+| `APP_ENV` | Identifies the runtime environment |
+| `API_KEY` | Used by the protected endpoint |
+
+Example structure:
+
+```env
+APP_NAME=Cloud Homelab v2 API
+APP_VERSION=1.0.0
+APP_ENV=azure
+API_KEY=<your-api-key>
+```
 
 The local `.env` file is not committed to GitHub.
 
-For screenshots and documentation, the API key was masked to avoid exposing secrets.
+The API key used during deployment was a development test value. In documentation and screenshots, secrets should be masked or redacted.
 
 ## Public API URL
 
@@ -133,7 +143,7 @@ The following endpoints were tested successfully in Azure:
 | `/health` | Returned healthy status |
 | `/version` | Returned service version and Azure environment |
 | `/docs` | Opened FastAPI Swagger documentation |
-| `/secure-info` | Returned protected response when API key was provided |
+| `/secure-info` | Returned protected response when an API key was provided |
 
 ## Example Responses
 
@@ -174,6 +184,26 @@ The following endpoints were tested successfully in Azure:
   "security": "API key authentication enabled"
 }
 ```
+
+## Protected Endpoint Testing
+
+The protected endpoint was tested through FastAPI Swagger documentation.
+
+Endpoint:
+
+```text
+GET /secure-info
+```
+
+Header used:
+
+```text
+x-api-key: <your-api-key>
+```
+
+The value must match the `API_KEY` environment variable configured in the Azure Container App.
+
+For documentation purposes, the actual API key should not be shown.
 
 ## Screenshots
 
@@ -225,15 +255,29 @@ The Azure deployment was successful.
 
 The project now includes:
 
-- A FastAPI API running locally
-- Environment-based configuration
+- a FastAPI API running locally
+- environment-based configuration
 - API key protection
 - Docker containerization
 - Azure Container Registry image storage
 - Azure Container Apps deployment
-- Public HTTP ingress
-- Successful Azure endpoint testing
-- Screenshots for documentation and portfolio use
+- public HTTP ingress
+- successful Azure endpoint testing
+- screenshots for documentation and portfolio use
+
+## Security Notes
+
+This deployment uses a development API key for testing.
+
+For a production-like setup, the API key should be handled through a more secure secret management approach.
+
+Future improvements may include:
+
+- storing secrets in GitHub Actions secrets
+- using Azure Key Vault
+- using managed identity where appropriate
+- rotating API keys
+- separating test, local and production configuration
 
 ## Next Step
 
@@ -241,6 +285,6 @@ The next step is to add monitoring for the Azure-hosted API.
 
 The planned monitoring setup is:
 
-- Monitor `/health` using Uptime Kuma from the local homelab
-- Review Azure logs through the Azure Portal
-- Document the monitoring setup in `docs/06-monitoring.md`
+- monitor `/health` using Uptime Kuma from the local homelab
+- review Azure logs through the Azure Portal
+- document the monitoring setup in `docs/06-monitoring.md`

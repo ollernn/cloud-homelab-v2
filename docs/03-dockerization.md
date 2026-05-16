@@ -6,6 +6,8 @@ The FastAPI application can be run inside a Docker container.
 
 This makes the application easier to run consistently across local development, servers and cloud environments.
 
+Dockerization is an important step because the same container image can be used locally and later deployed to Azure.
+
 ## Purpose
 
 Dockerization is used in this project to package the application together with its runtime environment.
@@ -25,6 +27,8 @@ The Docker setup uses the following files:
 | `Dockerfile` | Defines how the application image is built |
 | `docker-compose.yml` | Defines how the container is started locally |
 | `.dockerignore` | Excludes unnecessary or sensitive files from the Docker image |
+| `.env` | Provides local environment variables to Docker Compose |
+| `.env.example` | Shows which environment variables are required |
 
 ## Dockerfile
 
@@ -42,6 +46,12 @@ Expose port 8000
 Start Uvicorn
 ```
 
+The application listens on port:
+
+```text
+8000
+```
+
 ## Docker Compose
 
 Docker Compose is used to run the application locally in a container.
@@ -57,6 +67,46 @@ The container is named:
 ```text
 cloud-homelab-v2-api
 ```
+
+## Environment Variables
+
+Docker Compose loads environment variables from:
+
+```text
+.env
+```
+
+Example `.env.example` structure:
+
+```env
+APP_NAME=Cloud Homelab v2 API
+APP_VERSION=1.0.0
+APP_ENV=local
+API_KEY=change-me
+```
+
+The real `.env` file is excluded from Git using `.gitignore`.
+
+This means that sensitive or local-only values should not be committed to GitHub.
+
+## Docker Ignore
+
+The `.dockerignore` file prevents unnecessary or sensitive files from being copied into the Docker image.
+
+Examples of excluded files and folders:
+
+```text
+.venv
+__pycache__
+.pytest_cache
+.git
+.env
+.vscode
+.idea
+*.log
+```
+
+This helps keep the Docker image smaller and avoids copying local secrets into the image.
 
 ## Build and Run
 
@@ -78,32 +128,35 @@ After starting the container, the following endpoints can be tested:
 
 | Endpoint | Description |
 |---|---|
-| `/` | Root endpoint |
+| `/` | Root endpoint with project message |
 | `/health` | Health check endpoint |
 | `/version` | Shows service version and environment |
 | `/secure-info` | Protected endpoint requiring an API key |
 | `/docs` | FastAPI Swagger documentation |
 
-## Environment Variables
+## Testing the Protected Endpoint
 
-Docker Compose loads environment variables from:
+The protected endpoint can be tested through the Swagger documentation:
 
 ```text
-.env
+http://127.0.0.1:8000/docs
 ```
 
-The `.env` file contains local configuration such as:
+Open:
 
-```env
-APP_NAME=Cloud Homelab v2 API
-APP_VERSION=1.0.0
-APP_ENV=local
-API_KEY=dev-secret-key
+```text
+GET /secure-info
 ```
 
-The `.env` file is excluded from Git using `.gitignore`.
+Then provide the API key through the `x-api-key` header.
 
-The `.env.example` file is committed to GitHub to show which variables are required.
+Example:
+
+```text
+x-api-key: <your-api-key>
+```
+
+The value must match the `API_KEY` value in the local `.env` file.
 
 ## Stop the Container
 
@@ -123,8 +176,19 @@ docker compose down
 
 The FastAPI application now runs successfully inside Docker.
 
-This means the project is ready for the next steps:
+This confirms that:
 
-- automated testing
+- the application can be containerized
+- Docker Compose can start the API locally
+- environment variables can be passed into the container
+- the `/health`, `/version` and `/docs` endpoints work inside Docker
+- the protected `/secure-info` endpoint works when a valid API key is provided
+
+## Next Step
+
+After Dockerization, the project was ready for:
+
+- automated testing with pytest
 - GitHub Actions CI
-- Azure container deployment
+- Azure Container Registry
+- Azure Container Apps deployment
